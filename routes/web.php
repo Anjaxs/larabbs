@@ -13,6 +13,6 @@
 
 Route::get('/', 'PagesController@root')->name('root')->middleware('verified');
 
-Auth::routes([
-    'verify' => true
-]);
+Auth::routes(['verify' => true]);
+
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
