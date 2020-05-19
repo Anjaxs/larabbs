@@ -49,6 +49,9 @@ class ImageUploadHandler
             return false;
         }
 
+        // 将图片移动到我们的目标存储路径中
+        $file->move($uploadPath, $filename);
+
         // 如果限制了图片宽度，就进行裁剪
         if ($maxWidth && $extension != 'gif') {
 
@@ -56,8 +59,6 @@ class ImageUploadHandler
             $this->reduceSize($uploadPath . '/' . $filename, $maxWidth);
         }
 
-        // 将图片移动到我们的目标存储路径中
-        $file->move($uploadPath, $filename);
 
         return [
             'path' => config('app.url') . "/$folderName/$filename"
