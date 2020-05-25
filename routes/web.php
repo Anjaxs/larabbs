@@ -15,10 +15,10 @@
 
 Auth::routes(['verify' => true]);
 
-Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 Route::resource('topics', 'TopicsController', [
     'only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']
 ]);
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 
 Route::group(['middleware' => ['verified']], function () {
     Route::get('/', 'PagesController@root')->name('root');
