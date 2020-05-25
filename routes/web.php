@@ -15,8 +15,9 @@
 
 Auth::routes(['verify' => true]);
 
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 Route::resource('topics', 'TopicsController', [
-    'only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']
+    'only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']
 ]);
 
 Route::group(['middleware' => ['verified']], function () {
