@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
 
 Auth::routes(['verify' => true]);
 
