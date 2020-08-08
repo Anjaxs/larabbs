@@ -9,22 +9,22 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
 
 Auth::routes(['verify' => true]);
 
 Route::resource('topics', 'TopicsController', [
-    'only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']
+    'only' => ['index', 'create', 'store', 'update', 'edit', 'destroy'],
 ]);
 Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 
 Route::group(['middleware' => ['verified']], function () {
-    Route::get('/', 'PagesController@root')->name('root');
+    Route::get('/', 'TopicsController@index')->name('root');
 
     Route::resource('users', 'UsersController', [
-        'only' => ['show', 'update', 'edit']
+        'only' => ['show', 'update', 'edit'],
     ]);
 
     Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
@@ -35,5 +35,3 @@ Route::group(['middleware' => ['verified']], function () {
 
     Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 });
-
-
