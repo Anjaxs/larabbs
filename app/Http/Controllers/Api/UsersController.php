@@ -33,4 +33,14 @@ class UsersController extends Controller
 
         return new UserResource($user);
     }
+
+    public function show(User $user)
+    {
+        return new UserResource($user);
+    }
+
+    public function me()
+    {
+        return (new UserResource(auth('api')->user()))->showSensitiveFields();
+    }
 }
