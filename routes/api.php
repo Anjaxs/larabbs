@@ -47,6 +47,8 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
         Route::get('users/{user}', 'UsersController@show')->name('users.show');
         // 分类列表
         Route::get('categories', 'CategoriesController@index')->name('category.index');
+        // 某个用户发布的话题
+        Route::get('users/{user}/topics', 'TopicsController@userIndex')->name('users.topics.index');
 
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function () {
@@ -60,7 +62,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
             // 发布话题
             Route::resource('topics', 'TopicsController')->only([
-                'store', 'update', 'destroy',
+                'index', 'show', 'store', 'update', 'destroy',
             ]);
         });
     });
