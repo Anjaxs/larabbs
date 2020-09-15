@@ -45,16 +45,30 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
         // 某个用户的详情
         Route::get('users/{user}', 'UsersController@show')->name('users.show');
+
         // 分类列表
         Route::get('categories', 'CategoriesController@index')->name('category.index');
+
         // 某个用户发布的话题
         Route::get('users/{user}/topics', 'TopicsController@userIndex')->name('users.topics.index');
+
+        // 话题列表，详情
+        Route::resource('topics', 'TopicsController')->only([
+            'index', 'show'
+        ]);
+
+        // 话题回复列表
+        Route::get('topics/{topic}/replies', 'RepliesController@index')->name('topics.replies.index');
+
+        // 某个用户的回复列表
+        Route::get('users/{user}/replies', 'RepliesController@userIndex')->name('users.replies.index');
 
 
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function () {
             // 当前登录用户信息
             Route::get('user', 'UsersController@me')->name('user.show');
+
             // 编辑登录用户信息
             Route::patch('user', 'UsersController@update')->name('user.update');
 
@@ -63,7 +77,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
 
             // 发布话题
             Route::resource('topics', 'TopicsController')->only([
-                'index', 'show', 'store', 'update', 'destroy',
+                'store', 'update', 'destroy',
             ]);
 
             // 发布回复
