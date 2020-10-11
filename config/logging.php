@@ -6,6 +6,14 @@ use Monolog\Handler\SyslogUdpHandler;
 
 return [
 
+    'query' => [
+        'enabled' => true,
+
+        // Only record queries that are slower than the following time
+        // Unit: milliseconds
+        'slower_than' => 0,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Default Log Channel
