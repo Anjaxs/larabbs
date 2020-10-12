@@ -32,6 +32,10 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
         Route::post('authorizations', 'AuthorizationsController@store')
             ->name('api.authorizations.store');
 
+        // 小程序登录
+        Route::post('weapp/authorizations', 'AuthorizationsController@weappStore')
+            ->name('weapp.authorizations.store');
+
         // 刷新token
         Route::put('authorizations/current', 'AuthorizationsController@update')
             ->name('authorizations.update');
