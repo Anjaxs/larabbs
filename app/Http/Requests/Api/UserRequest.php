@@ -21,11 +21,12 @@ class UserRequest extends FormRequest
                 ];
                 break;
             case 'PATCH':
+            case 'PUT':
                 $userId = auth('api')->id();
                 return [
                     'name' => 'between:3,25|regex:/[\w\x{4e00}-\x{9fa5}]{2,25}/u|unique:users,name,' . $userId,
                     'email' => 'email|unique:users,email,' . $userId,
-                    'introduction' => 'max:80',
+                    'intro' => 'max:80',
                     'avatar_image_id' => 'exists:images,id,type,avatar,user_id,' . $userId,
                 ];
                 break;
